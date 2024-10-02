@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"log"
 	datastructures "testproject/data_structures"
 	"testproject/db"
 )
@@ -24,6 +26,15 @@ func main() {
 	// datastructures.HashData(ctx, client)
 	// datastructures.Lists(ctx, client)
 	// datastructures.Set(ctx, client)
-	datastructures.SortedSets(ctx, client)
+	// datastructures.SortedSets(ctx, client)
+
+	userId := "10"
+	userData, err := datastructures.GetDataWithCache(ctx, client, userId)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("user's data : %s\n", userData)
+
 	defer client.Close()
 }
